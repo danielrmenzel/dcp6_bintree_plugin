@@ -1,0 +1,90 @@
+<group .visible=false>
+<p>Alice</p> -> var name_a
+<p>Brian</p> -> var name_b
+<p>Clara</p> -> var name_c
+<p>David</p> -> var name_d
+<p>Emily</p> -> var name_e
+<p>Frank</p> -> var name_f
+<p>Grace</p> -> var name_g
+<p>Henry</p> -> var name_h
+<p>Irene</p> -> var name_i
+<p>James</p> -> var name_j
+<p>Kathy</p> -> var name_k
+<p>Lydia</p> -> var name_l
+<p>Maria</p> -> var name_m
+<p>Nancy</p> -> var name_n
+<p>Oscar</p> -> var name_o
+
+</group>
+
+<box .visible=false, .dir=1, .right=0.5, .width=50></box> -> var placeholder_box
+
+<table>
+  <tr>
+	<td>
+	<td>
+	<td>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_a.text)</box> -> var a </group>
+	<td>
+	<td>
+	<td>
+	<td>
+  </tr>
+
+  <tr>
+	<td>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_b.text)</box> -> var b </group>
+	<td>
+	<td>
+	<td>
+	<td>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_c.text)</box> -> var c </group>
+	<td>
+</tr>
+<tr>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_d.text)</box> -> var d </group>
+	<td>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_e.text)</box> -> var e </group>
+    <td>
+    <td>
+	<td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_f.text)</box> -> var f </group>
+	<td>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_g.text)</box> -> var g </group>
+</tr>
+
+<tr><td> </tr>
+
+<tr>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_h.text)</box> -> var h </group>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_i.text)</box> -> var i </group>
+	<td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_j.text)</box> -> var j </group>
+	<td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_k.text)</box> -> var k </group>
+    <td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_l.text)</box> -> var l </group>
+	<td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_m.text)</box> -> var m </group>
+	<td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_n.text)</box> -> var n </group>
+	<td><group><box .dir=1, .right=0.5, .width=50, .bgcolor=#ffff00>$(name_o.text)</box> -> var o </group>
+</tr>
+</table>
+
+
+
+<arrow .from=a, .to=b></arrow>
+<arrow .from=a, .to=c></arrow>
+
+<arrow .from=b, .to=d></arrow>
+<arrow .from=b, .to=e></arrow>
+
+<arrow .from=c, .to=f></arrow>
+<arrow .from=c, .to=g></arrow>
+
+<arrow .from=d, .to=h></arrow>
+<arrow .from=d, .to=i></arrow>
+
+<arrow .from=e, .to=j></arrow>
+<arrow .from=e, .to=k></arrow>
+
+<arrow .from=f, .to=l></arrow>
+<arrow .from=f, .to=m></arrow>
+
+<arrow .from=g, .to=n></arrow>
+<arrow .from=g, .to=o></arrow>
