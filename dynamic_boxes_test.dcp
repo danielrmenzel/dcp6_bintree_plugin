@@ -1,0 +1,21 @@
+fun create_node(name){
+	.append(<p>create_node() called</p>);
+	<box .dir = 1, .oid = 78, .width=120, .bgcolor=#99ccff>$(name)</box>
+}
+
+
+fun create_level(group){
+    var arr = ["AAA", "BBB", "CCC"];
+    
+    group.append(<tr></tr>);
+
+    arr.foreach(element){
+        .append(<p>"Element": $(element)</p>);
+        .append(<p>"group: "$(group.name)</p>);
+        
+        var box = create_node(element);
+        
+        group.append(box);  // Append the box to the row (group)
+    }
+
+}
