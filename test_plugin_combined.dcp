@@ -1,0 +1,431 @@
+/* Updated Binary Tree Visualization Plugin to Collect Level-wise Node Names */
+
+<image .width = 100, .top>:./Images/dcpLogo128.png</image>
+
+<h1 .color=#8AC>Binary Tree Visualization</h1>
+<tr>
+  <h4>Root:</h4><input .len=40, .width=120>root</input> -> var root
+  <td><h4>Left Child Field:</h4><input .len=40, .width=120>left</input> -> var left
+  <td><h4>Right Child Field:</h4><input .len=40, .width=120>right</input> -> var right
+  <p .onClick = add(root, left, right)><u>Show</u></p>
+</tr>
+
+<group></group> -> var image;
+
+
+var row_d_counter = 0;
+
+var f;
+
+fun add(root, left, right) {
+    var g = <group>
+        <p .onClick = del><u>Delete</u></p>
+        <h5>Root: $(root.text), Left Child: $(left.text), Right Child: $(right.text)</h5>
+        <div .hd = $(root.text), .left = $(left.text), .right = $(right.text), .oid = 77></div>
+    </group>;
+    image.append(g);
+    var pRoot = VCThread.getVariableValue(root.text);
+    if (!f) {
+        if (!pRoot || pRoot == "*undefined*") {
+            <footer>Please press F10 (step over) or F11 (step into) to update the view</footer>
+            f = true;
+        }
+    }
+    OnBreaked();
+}
+
+
+fun del() {
+	.append(<p>entering del()</p>);
+
+    var parentGroup = this.parent;
+    parentGroup.delete();  // Delete the parent group
+
+
+}
+
+
+fun deleteAll() {
+    while (pageView.child) {
+        pageView.child.delete();
+    }
+}
+
+fun init(){
+	global.width = 1200;
+
+}
+
+fun DrawTreeInS(s) {
+
+    /* Remove previous visualization elements */
+    s.foreach(x).filter(x.oid == 78) {
+        x.delete();
+		//this.parent.delete();
+
+    }
+
+    var pRoot = VCThread.getVariableValue(s.hd);
+    var pType = VCThread.getVariableType(s.hd);
+
+    if (pRoot == "*undefined*" || pType == "*undefined*") {
+        var errorMsg = <p .color = #f00, .oid = 78>*Invalid root variable*</p>;
+        s.append(errorMsg);
+    } else {
+        var output = <div .oid=78></div>;
+        var levels = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]; // 31 empty strings
+        TraverseTree(pRoot, pType.text, s.left, s.right, levels, 0, 0, output);
+        s.append(output);
+
+        //s.append(<p>levels: $levels</p>);
+		//.append(<p>end of DrawTreeInS-function</p>);
+		//init(levels);
+		//.append(<p>Inside placeholder function, array: $(array)</p>);
+
+
+    <group>
+		<tr>
+	        <box .oid = 78, .width=120, .bgcolor=#99ccff>$(root_name)</box> -> var box_root
+		</tr>
+    </group>
+    <p> </p>
+
+    <group>
+        <tr>
+            <box .oid = 78, .width=120, .bgcolor=#99ccff>$(myArray[1])</box> -> var box_b0
+			<box .oid = 78, .width=120, .bgcolor=#99ccff>$(myArray[2])</box> -> var box_b1
+
+	    </tr>
+    </group>
+    <p> </p>
+
+    <arrow .visible = false, .from=box_root, .to=box_b0, .connection="top"></arrow> -> var arrow_root_to_b0;
+    <arrow .visible = false, .from=box_root, .to=box_b1, .connection="top"></arrow> -> var arrow_root_to_b1;
+
+    <group>
+        <tr>
+        <box .oid = 78, .width=120, .bgcolor=#99ccff>$(myArray[3])</box> -> var box_c0
+	    <box .oid = 78, .like = box_c0, .bgcolor = box_c0.bgcolor>$(myArray[4])</box> -> var box_c1
+        <box .oid = 78, .like = box_c0, .bgcolor = box_c0.bgcolor>$(myArray[5])</box> -> var box_c2
+		<box .oid = 78, .like = box_c0, .bgcolor = box_c0.bgcolor>$(myArray[6])</box> -> var box_c3
+		</tr>
+    </group>
+	<p> </p>
+
+    <arrow .visible = false, .from=box_b0, .to=box_c0, .connection="top"></arrow> -> var arrow_b0_to_c0;
+    <arrow .visible = false, .from=box_b0, .to=box_c1, .connection="top"></arrow> -> var arrow_b0_to_c1;
+    <arrow .visible = false, .from=box_b1, .to=box_c2, .connection="top"></arrow> -> var arrow_b1_to_c2;
+    <arrow .visible = false, .from=box_b1, .to=box_c3, .connection="top"></arrow> -> var arrow_b1_to_c3;
+
+    <group>
+        <tr>
+            <box .oid = 78, .width=120, .bgcolor=#99ccff>$(myArray[7])</box> -> var box_d0
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[8])</box> -> var box_d1
+
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[9])</box> -> var box_d2
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[10])</box> -> var box_d3
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[11])</box> -> var box_d4
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[12])</box> -> var box_d5
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[13])</box> -> var box_d6
+            <box .oid = 78, .like = box_d0, .bgcolor = box_c0.bgcolor>$(myArray[14])</box> -> var box_d7
+        </tr>
+    </group>
+    <arrow .dir = false, .visible = false, .from=box_c0, .to=box_d0></arrow> -> var arrow_c0_to_d0;
+    <arrow .dir = false, .visible = false, .from=box_c0, .to=box_d1></arrow> -> var arrow_c0_to_d1;
+    <arrow .dir = false, .visible = false, .from=box_c1, .to=box_d2></arrow> -> var arrow_c1_to_d2;
+    <arrow .dir = false, .visible = false, .from=box_c1, .to=box_d3></arrow> -> var arrow_c1_to_d3;
+    <arrow .dir = false, .visible = false, .from=box_c2, .to=box_d4></arrow> -> var arrow_c2_to_d4;
+    <arrow .dir = false, .visible = false, .from=box_c2, .to=box_d5></arrow> -> var arrow_c2_to_d5;
+    <arrow .dir = false, .visible = false, .from=box_c3, .to=box_d6></arrow> -> var arrow_c3_to_d6;
+    <arrow .dir = false, .visible = false, .from=box_c3, .to=box_d7></arrow> -> var arrow_c3_to_d7;
+
+    root_name = levels[0];
+    box_root.text = root_name;
+
+	var a0 = levels[0];
+	var b0 = levels[1];
+	var b1 = levels[2];
+	var c0 = levels[3];
+	var c1 = levels[4];
+	var c2 = levels[5];
+	var c3 = levels[6];
+	var d0 = levels[7];
+	var d1 = levels[8];
+	var d2 = levels[9];
+	var d3 = levels[10];
+	var d4 = levels[11];
+	var d5 = levels[12];
+	var d6 = levels[13];
+	var d7 = levels[14];
+	var e0 = levels[15];
+	var e1 = levels[16];
+	var e2 = levels[17];
+	var e3 = levels[18];
+	var e4 = levels[19];
+	var e5 = levels[20];
+	var e6 = levels[21];
+	var e7 = levels[22];
+	var e8 = levels[23];
+	var e9 = levels[24];
+	var e10 = levels[25];
+	var e11 = levels[26];
+	var e12 = levels[27];
+	var e13 = levels[28];
+	var e14 = levels[29];
+	var e15 = levels[30];
+
+	var elementsInRowDelta = countElementsInRow(levels, 3);	//3=delta, 4=echo
+	if(elementsInRowDelta > 4){
+		box_d0.width = 70.625;
+		box_d1.width = 70.625;
+		box_d2.width = 70.625;
+		box_d3.width = 70.625;
+		box_d4.width = 70.625;
+		box_d5.width = 70.625;
+		box_d6.width = 70.625;
+		box_d7.width = 70.625;
+		box_d0.fontsize = -1;
+		box_d1.fontsize = -1;
+		box_d2.fontsize = -1;
+		box_d3.fontsize = -1;
+		box_d4.fontsize = -1;
+		box_d5.fontsize = -1;
+		box_d6.fontsize = -1;
+		box_d7.fontsize = -1;
+
+
+	}else{
+		
+
+
+	}
+
+    // Level b
+    if (b0.length == 0) {
+        box_b0.visible = false;
+        box_c0.visible = false;
+        box_c1.visible = false;
+        box_d0.visible = false;
+        box_d1.visible = false;
+        box_d2.visible = false;
+        box_d3.visible = false;
+    } else {
+        box_b0.text = b0;
+        arrow_root_to_b0.visible = true;
+    }
+
+    if (b1.length == 0) {
+        box_b1.visible = false;
+        box_c2.visible = false;
+        box_c3.visible = false;
+        box_d4.visible = false;
+        box_d5.visible = false;
+        box_d6.visible = false;
+        box_d7.visible = false;
+    } else {
+        box_b1.text = b1;
+        arrow_root_to_b1.visible = true;
+    }
+
+    // Level c
+    if (b0.length != 0) {
+        if (c0.length == 0) {
+            box_c0.visible = false;
+            box_d0.visible = false;
+            box_d1.visible = false;
+        } else {
+            box_c0.text = c0;
+            arrow_b0_to_c0.visible = true;
+        }
+
+        if (c1.length == 0) {
+            box_c1.visible = false;
+            box_d2.visible = false;
+            box_d3.visible = false;
+        } else {
+            box_c1.text = c1;
+            arrow_b0_to_c1.visible = true;
+        }
+    }
+
+    if (b1.length != 0) {
+        if (c2.length == 0) {
+            box_c2.visible = false;
+            box_d4.visible = false;
+            box_d5.visible = false;
+        } else {
+            box_c2.text = c2;
+            arrow_b1_to_c2.visible = true;
+        }
+
+        if (c3.length == 0) {
+            box_c3.visible = false;
+            box_d6.visible = false;
+            box_d7.visible = false;
+        } else {
+            box_c3.text = c3;
+            arrow_b1_to_c3.visible = true;
+        }
+    }
+
+    // Level d
+    if (b0.length != 0 && c0.length != 0) {
+        if (d0.length == 0) {
+            box_d0.visible = false;
+        } else {
+            box_d0.text = d0;
+            arrow_c0_to_d0.visible = true;
+        }
+
+        if (d1.length == 0) {
+            box_d1.visible = false;
+        } else {
+            box_d1.text = d1;
+            arrow_c0_to_d1.visible = true;
+        }
+    }
+
+    if (b0.length != 0 && c1.length != 0) {
+        if (d2.length == 0) {
+            box_d2.visible = false;
+        } else {
+            box_d2.text = d2;
+            arrow_c1_to_d2.visible = true;
+        }
+
+        if (d3.length == 0) {
+            box_d3.visible = false;
+        } else {
+            box_d3.text = d3;
+            arrow_c1_to_d3.visible = true;
+        }
+    }
+
+    if (b1.length != 0 && c2.length != 0) {
+        if (d4.length == 0) {
+            box_d4.visible = false;
+        } else {
+            box_d4.text = d4;
+            arrow_c2_to_d4.visible = true;
+        }
+
+        if (d5.length == 0) {
+            box_d5.visible = false;
+        } else {
+            box_d5.text = d5;
+            arrow_c2_to_d5.visible = true;
+        }
+    }
+
+    if (b1.length != 0 && c3.length != 0) {
+        if (d6.length == 0) {
+            box_d6.visible = false;
+        } else {
+            box_d6.text = d6;
+            arrow_c3_to_d6.visible = true;
+        }
+
+        if (d7.length == 0) {
+            box_d7.visible = false;
+        } else {
+            box_d7.text = d7;
+            arrow_c3_to_d7.visible = true;
+        }
+    }
+    }
+	levels;
+}
+
+
+fun pow2(exponent) {
+    var result = 1;
+	var i = 0;
+	while(i < exponent){
+        result = result * 2;
+		i++;
+    }
+    return result;
+}
+
+/*******************/
+/*elementsInRowArray: */
+fun countElementsInRow(elementsInRowArray, depth){	
+	.append(<p>entering countElementsInRow()</p>);
+	var i = 0;
+	var array_size = elementsInRowArray.length;
+	var elementCounter = 0;
+	var start_pos = pow2(depth)-1;
+	
+	var end_pos = array_size - start_pos;
+	.append(<p>depth: $(depth)</p>);
+	.append(<p>start_pos: $(start_pos)</p>);
+	
+	.append(<p>end_pos: $(end_pos)</p>);
+
+	var current_pos = start_pos;
+	while(current_pos < end_pos){
+		
+		var tmp = elementsInRowArray[current_pos];
+		if(tmp.length!=0){
+			elementCounter += 1;
+		}
+		current_pos++;
+	
+	}
+	.append(<p>elementCounter: $(elementCounter)</p>);
+	return elementCounter;
+}
+
+fun TraverseTree(nodeValue, nodeType, leftFieldName, rightFieldName, levels, currentLevel, position, output) {
+    //.append(<p>current level: $(currentLevel)</p>);
+	if (currentLevel >4 ) {
+		.append(<p .color = #ff0000>Maximum depth reached, some nodes won't be displayed.</p>);
+        return;
+    }
+
+    /* Add empty string for missing nodes */
+    if (nodeValue.value == 0) {
+        return;
+    }
+
+    /* Get node data (e.g., name) */
+    var nodeName = VCThread.getMemberContents(nodeValue.value, nodeType, "name");
+    if (nodeName == "*invalid_member*" || nodeName == "*invalid*" || nodeName == "*undefined*") {
+        var errorMsg = <p .color = #f00>Cannot access 'name' field at address $(nodeValue.value)</p>;
+        output.append(errorMsg);
+        return;
+    }
+    //var nodeData = nodeName.text;
+
+    /* Add node data to the correct position in the levels array */
+	var nodeAddress = nodeValue.value;  // Get the address of the current node
+    //levels[position] = nodeName.text  + "test";
+	levels[position] = nodeName.text + " (0x" + nodeAddress + ")";  // Store name + address in levels array
+
+    /* Display the node data */
+    //var nodeLine = <p>Level $(currentLevel + 1) - Position $(position): $nodeData</p>;
+    //output.append(nodeLine);//!!
+
+    /* Get left and right child pointers */
+    var leftChild = VCThread.getMemberContents(nodeValue.value, nodeType, leftFieldName);
+    var rightChild = VCThread.getMemberContents(nodeValue.value, nodeType, rightFieldName);
+
+    /* Recursively traverse left and right subtrees */
+    TraverseTree(leftChild, nodeType, leftFieldName, rightFieldName, levels, currentLevel + 1, 2 * position + 1, output);
+    TraverseTree(rightChild, nodeType, leftFieldName, rightFieldName, levels, currentLevel + 1, 2 * position + 2, output);
+}
+fun deleteAll() {
+    while(pageView.child)
+        pageView.child.delete();
+}
+fun OnBreaked() {
+	//deleteAll();
+	
+
+    image.foreach(s).filter(s.oid == 77) {
+        var tree_array = DrawTreeInS(s);
+		.append(<p> </p>);
+		.append(<p>tree_array: $(tree_array)</p>);
+		.append(<p>row_d_counter:$(row_d_counter)</p>);
+    }
+}
